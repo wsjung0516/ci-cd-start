@@ -17,9 +17,9 @@ image 1.
 -----
 
 ### Frontend  Development Method:
-1. It is implemented with docker-compose by bundling the database and backend at once.
-2. Frontend programs are developed in an environment that does not use docker.
-3. During the test, the data is transmitted and received with the backend program operated by docker-compose.
+1. It is implemented with docker-compose by bundling the database and backend program.
+2. Frontend program is developed in an environment that does not use docker.
+3. During the test, the data is transmitted and received from the backend program, which is bundled by docker-compose.
 
 image 2.
 ![](images/ci-cd2.png)
@@ -27,12 +27,12 @@ image 2.
 ----
 ## CD
 
-1. Commit and push the frontend and backend programs to github. 
-2. By performing Github Acton, and database image, backend image, and frontend image are created by the docker and github action pipeline and pushed to ECR (AWS docker image hub). 
-3. backend task (image 3, no. 3)
-4. frontend task (image 3, no. 4)
-5. When a new image is updated in ECR by detecting ECR, current running application task is not automatically updated actually (to control the update time and apply various variables). Two tasks run concurrently for a certain period of time.
-6. If task is updated manually, the original task operates as it is for a certain period of time , and the new task waiting to be updated, and then old task is replaced with the new task smoothly, the current task that is operating does not stop until the new task is replaced completely, so the user can continue work without the task (web program) being stopped.
+1. Committed and pushed frontend, backend and database programs to github. (image 3, no. 1)
+2. By performing Github Acton, database image, backend image, and frontend image are created by the docker and github action pipeline and pushed to ECR (AWS docker image hub). (image 3, no. 2) 
+3. Backend task: Backend Web program (image 3, no. 3)
+4. Frontend task Frontend Web program (image 3, no. 4)
+5. When a new image is updated in ECS by monitoring from ECR, current running application task is not automatically updated actually (to control the update time and to apply various variables). Two tasks run concurrently for a certain period of time.
+6. When Docker images are pushed to ECR, the administrator must manually update the task for the modified program. When an update operation is in progress, the current running task is not stopped, as the original task remains working for a period of time, waiting for the new task to be updated, and then the old task is seamlessly replaced by the new task. While these background operations are in progress, users can continue their operations (web programs) without stopping.
 
 image 3.
 ![](images/ci-cd3.png)
@@ -42,9 +42,9 @@ image 3.
 ## AWS 
 ### Cluster configuration: 
 1. ECS cluster consists of two tasks in one cluster, and each task operates as a web program.. 
-   * task 1:  container 1: backend server
+   * task 1:  container 1: backend server (image 3, no. 3)
               container 2: database
-   * task 2:  container 1: frontend 
+   * task 2:  container 1: frontend (image 3, no. 4)
 
 
 2. How it works: 
@@ -53,7 +53,5 @@ image 3.
 
 -----
 ### Considerations when connecting Backend program and Database
-1. When developing locally, if the database and backend are implemented with docker-compose, the container name of the database is used as the host name in order for the backend to interact with the database.
-2. In AWS, because the containers included in one task are implemented in the same network, the address of the database is designated as localhost, so backend grogram can connect to the database withe it.
-
-
+1. When developing locally, when the database and backend are implemented with docker-compose, the backend program uses the database's container name as the hostname to communicate with the database.
+2. When setting for a CD (Continuous Deploy) task in AWS, the backend program can connect to the database by specifying the address of the database as localhost because the containers included in one task are implemented on the same network.

@@ -6,7 +6,7 @@
 
 -----
 ## CI
-### Backend Development Method:
+### Backend Program Development Method:
 1. Only database is implemented with docker-compose.
 2. When developing a backend program, it is developed in an environment that does not use docker.
 3. During testing, data is transmitted and received from the database operating in the docker-compose method.
@@ -16,7 +16,7 @@ image 1.
 
 -----
 
-### Frontend  Development Method:
+### Frontend  Program Development Method:
 1. It is implemented with docker-compose by bundling the database and backend program.
 2. Frontend program is developed in an environment that does not use docker.
 3. During the test, the data is transmitted and received from the backend program, which is bundled by docker-compose.
@@ -32,7 +32,7 @@ image 2.
 3. Backend task: Backend Web program (image 3, no. 3)
 4. Frontend task Frontend Web program (image 3, no. 4)
 5. When a new image is updated in ECS by monitoring from ECR, current running application task is not automatically updated actually (to control the update time and to apply various variables). Two tasks run concurrently for a certain period of time.
-6. When Docker images are pushed to ECR, the administrator must manually update the task for the modified program. When an update operation is in progress, the current running task is not stopped, as the original task remains working for a period of time, waiting for the new task to be updated, and then the old task is seamlessly replaced by the new task. While these background operations are in progress, users can continue their operations (web programs) without stopping.
+6. When Docker images are pushed to ECR, the administrator must manually update the task for the modified program. When an update operation is in progress, the current running task is not stopped, as the original task remains working for a period of time, waiting for the new task to be updated, and then the old task is seamlessly replaced by the new task. While these background operations are in progress, users can continue their operations (web programs) without stopping and interrupting.
 
 image 3.
 ![](images/ci-cd3.png)

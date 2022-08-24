@@ -42,9 +42,12 @@ image 3.
 ## AWS 
 ### Cluster configuration: 
 1. ECS cluster consists of two tasks in one cluster, and each task operates as a web program.. 
-   * task 1:  container 1: backend server (image 3, no. 3)
-              container 2: database
-   * task 2:  container 1: frontend (image 3, no. 4)
+   * task 1:  
+   container 1: backend server  (image 3, no. 3)  
+              container 2: database  
+
+   * task 2:  
+   container 1: frontend (image 3, no. 4)
 
 
 2. How it works: 

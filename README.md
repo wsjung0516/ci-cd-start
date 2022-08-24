@@ -3,13 +3,15 @@
 * Database: Implemented by reading database image (mysql, mongodb, postgress, etc.) from hub.docker.com.
 * Backend: Developed with nestjs, typeOrm (when developing RDBMS).
 * Frontend: Development with Angular. 
-
+----
 ## CI
+---
 ### Frontend  Development Method:
 1. It is implemented with docker-compose by bundling the database and backend at once.
 2. Frontend programs are developed in an environment that does not use docker.
 3. During the test, the data is transmitted and received with the backend program operated by docker-compose.
 ![](images/ci-cd2.png)
+---
 ### Backend Development Method:
 1. Only database is implemented with docker-compose.
 2. When developing a backend program, it is developed in an environment that does not use docker.

@@ -1,11 +1,11 @@
 # CI/CD
-### The program is developed by using docker.
+## programs are developed by using docker.
 * Database: Implemented by reading database image (mysql, mongodb, postgress, etc.) from hub.docker.com.
 * Backend: Developed with nestjs, typeOrm (when developing RDBMS).
 * Frontend: Development with Angular. 
+
 -----
 ## CI
-----
 ### Frontend  Development Method:
 1. It is implemented with docker-compose by bundling the database and backend at once.
 2. Frontend programs are developed in an environment that does not use docker.
@@ -21,6 +21,7 @@
 
 -----
 ## CD
+
 1. Commit and push frontend and backend programs to github. 
 2. By performing Github Acton, each database, backend, and frontend program is created as a Docker image and pushed to ECR (AWS docker image hub). 
 3. When a new image is updated in ECR, the actually running application is not automatically updated (to control the update time and apply various variables). And apply the update task in ECS only to the updated task.

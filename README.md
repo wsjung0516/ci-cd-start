@@ -6,27 +6,37 @@
 
 -----
 ## CI
-### Frontend  Development Method:
-1. It is implemented with docker-compose by bundling the database and backend at once.
-2. Frontend programs are developed in an environment that does not use docker.
-3. During the test, the data is transmitted and received with the backend program operated by docker-compose.
-![](images/ci-cd2.png)
-
-----
 ### Backend Development Method:
 1. Only database is implemented with docker-compose.
 2. When developing a backend program, it is developed in an environment that does not use docker.
 3. During testing, data is transmitted and received from the database operating in the docker-compose method.
+
+image 1.
 ![](images/ci-cd1.png)
 
 -----
+
+### Frontend  Development Method:
+1. It is implemented with docker-compose by bundling the database and backend at once.
+2. Frontend programs are developed in an environment that does not use docker.
+3. During the test, the data is transmitted and received with the backend program operated by docker-compose.
+
+image 2.
+![](images/ci-cd2.png)
+
+----
 ## CD
 
-1. Commit and push frontend and backend programs to github. 
-2. By performing Github Acton, each database, backend, and frontend program is created as a Docker image and pushed to ECR (AWS docker image hub). 
-3. When a new image is updated in ECR by detecting ECR, the actually current running application task is not automatically updated (to control the update time and apply various variables). And applied the new task in a few minutes later, then new task start to running.
-4. If task is updated manually, the original task operates as it is for a certain period of time , and the new version waiting to be updated is operating at the same time, and then old program is replaced with the new program smoothly, the current program that is operating does not stop until the new task is updated completely, so the user can continue to work without the program being stopped.
+1. Commit and push the frontend and backend programs to github. 
+2. By performing Github Acton, and database image, backend image, and frontend image are created by the docker and github action pipeline and pushed to ECR (AWS docker image hub). 
+3. backend task (image 3, no. 3)
+4. frontend task (image 3, no. 4)
+5. When a new image is updated in ECR by detecting ECR, current running application task is not automatically updated actually (to control the update time and apply various variables). Two tasks run concurrently for a certain period of time.
+6. If task is updated manually, the original task operates as it is for a certain period of time , and the new task waiting to be updated, and then old task is replaced with the new task smoothly, the current task that is operating does not stop until the new task is replaced completely, so the user can continue work without the task (web program) being stopped.
+
+image 3.
 ![](images/ci-cd3.png)
+
 
 -----
 ## AWS 

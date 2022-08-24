@@ -44,6 +44,6 @@
 -----
 ### Considerations when connecting Backend program and Database
 1. When developing locally, if the database and backend are implemented with docker-compose, the container name of the database is used as the host name in order for the backend to interact with the database.
-2. In AWS, because the containers included in one task are implemented in the same network, the address of the database is designated as localhost when connecting to the database in the backend program.
+2. In AWS, because the containers included in one task are implemented in the same network, the address of the database is designated as localhost, so backend grogram can connect to the database withe it.
 
 

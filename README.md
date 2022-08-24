@@ -25,7 +25,7 @@
 1. Commit and push frontend and backend programs to github. 
 2. By performing Github Acton, each database, backend, and frontend program is created as a Docker image and pushed to ECR (AWS docker image hub). 
 3. When a new image is updated in ECR by detecting ECR, the actually current running application task is not automatically updated (to control the update time and apply various variables). And applied the new task in a few minutes later, then new task start to running.
-4. If task is updated manually, the task that was previously operated operates as it is for a certain period of time , and the new version waiting to be updated is operated at the same time, and then replaced with the new version. At this time, the situation in which the previously operated Web is not stopped does not occur, so the user can continue to work without the program being stopped.
+4. If task is updated manually, the original task operates as it is for a certain period of time , and the new version waiting to be updated is operating at the same time, and then old program is replaced with the new program smoothly, the current program that is operating does not stop until the new task is updated completely, so the user can continue to work without the program being stopped.
 ![](images/ci-cd3.png)
 
 -----

@@ -40,6 +40,7 @@
 2. How it works: 
    * Database and backend operate as one web application.
    * Sending and receiving data from frontend web to backend web.
+   
 -----
 ### Considerations when connecting Backend program and Database
 1. When developing locally, if the database and backend are implemented with docker-compose, the container name of the database is used as the host name in order for the backend to interact with the database.
